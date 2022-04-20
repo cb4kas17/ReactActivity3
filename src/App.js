@@ -1,25 +1,43 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import WelcomePage from './pages/WelcomePage';
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegisterationPage';
+import HomePage from './pages/HomePage';
+
+import bg from './assets/bg.avif';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    const [users, setUsers] = useState([{}]);
+    const [user, setUser] = useState({});
 
+    const passData = (data) => {
+        setUsers([...users, data]);
+    };
+    console.log('user ', user);
+    const login = (data) => {
+        users.forEach((item) => {
+            console.log(item.id, data.id);
+            console.log(item.password, data.password);
+            if (item.id == data.id && item.password == data.password) {
+                setUser(item);
+                console.log('found');
+            }
+        });
+    };
+    return (
+        <div className="container">
+            <img src={bg} alt="" className="bgimg" />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/login" element={<LoginPage login={login} users={users} />} />
+                    <Route path="/signup" element={<RegistrationPage passData={passData} />} />
+                    <Route path="/welcome" element={<WelcomePage user={user} />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
+}
 export default App;

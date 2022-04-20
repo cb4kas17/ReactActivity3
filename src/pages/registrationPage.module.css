@@ -1,0 +1,29 @@
+.signuppageContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100rem;
+    width: 80rem;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formfieldContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem;
+}
+
+.btngroup {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5rem;
+}
