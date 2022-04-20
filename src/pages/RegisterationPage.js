@@ -6,6 +6,7 @@ import { Button, TextField } from '@mui/material';
 import Card from '../components/Card';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { toast } from "react-toastify";
 const validationSchema = yup.object({
     id: yup.number('Should be a number').required('Required'),
     lastName: yup.string().required('Required.'),
@@ -38,6 +39,7 @@ function RegisterationPage(props) {
         onSubmit: async (data) => {
             props.passData(data);
             console.log(data);
+            toast.success("User successfully registered");
             navigate('/login');
         },
         validationSchema: validationSchema,

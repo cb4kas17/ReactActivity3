@@ -5,9 +5,11 @@ import WelcomePage from './pages/WelcomePage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegisterationPage';
 import HomePage from './pages/HomePage';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import bg from './assets/bg.avif';
 
+toast.configure();
 function App() {
     const [users, setUsers] = useState([{}]);
     const [user, setUser] = useState({});
@@ -30,6 +32,7 @@ function App() {
         <div className="container">
             <img src={bg} alt="" className="bgimg" />
             <BrowserRouter>
+                <ToastContainer style={{fontSize: "1.5rem"}}/>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
                     <Route path="/login" element={<LoginPage login={login} users={users} />} />
