@@ -10,13 +10,10 @@ function LoginPage(props) {
     const [pw, setPw] = useState('');
     const [invalid, setInvalid] = useState(false);
 
-
     const loginHandler = () => {
         const data = { id: id, password: pw };
         props.login(data);
         props.users.forEach((item) => {
-        
-
             if (item.id == id && item.password == pw) {
                 navigate('/welcome');
             } else {
@@ -59,7 +56,6 @@ function LoginPage(props) {
                     />
                     {invalid && <div className={styles.invalid}>Invalid login</div>}
                     <div className={styles.btngroup}>
-                        {' '}
                         <Button variant="contained" sx={{ fontSize: 25 }} onClick={loginHandler}>
                             Login
                         </Button>

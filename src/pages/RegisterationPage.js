@@ -6,16 +6,19 @@ import { Button, TextField } from '@mui/material';
 import Card from '../components/Card';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 const validationSchema = yup.object({
-    id: yup.number('Should be a number').required('Required'),
+    id: yup.string('Should be a number').length(10, 'Must be 10 characters').required('Required'),
     lastName: yup.string().required('Required.'),
     firstName: yup.string().required('Required.'),
     middleName: yup.string().required('Required.'),
     college: yup.string().required('Required.'),
     program: yup.string().required('Required.'),
-    yearLevel: yup.number().required('Required.'),
-    password: yup.string().required('Required.'),
+    yearLevel: yup.number('year level should be a number').required('Required.'),
+    password: yup
+        .string()
+        .required('Required.')
+        .matches(/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/, 'Password must contain at least 8 characters, one uppercase, one number and one special case character'),
     confirmPassword: yup
         .string()
         .required('Required')
@@ -39,7 +42,7 @@ function RegisterationPage(props) {
         onSubmit: async (data) => {
             props.passData(data);
             console.log(data);
-            toast.success("User successfully registered");
+            toast.success('User successfully registered');
             navigate('/login');
         },
         validationSchema: validationSchema,
@@ -60,6 +63,7 @@ function RegisterationPage(props) {
                         value={formik.values.id}
                         helperText={formik.touched.id && formik.errors.id}
                         error={formik.touched.id && Boolean(formik.errors.id)}
+                        InputHelperTextProps={{ style: { fontSize: 40 } }}
                     />
                     <TextField
                         id="lastName"
